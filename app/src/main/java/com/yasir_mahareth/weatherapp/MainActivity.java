@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 Log.d("Clima", "onLocationChanged. callback received ");
+                String latitude=String.valueOf(location.getLatitude());
+                String longitude=String.valueOf(location.getLongitude());
+
+                Log.d("Clima", "onLocationChanged: Latitude is "+latitude);
+                Log.d("Clima", "onLocationChanged: longitude is "+longitude);
             }
 
             @Override
