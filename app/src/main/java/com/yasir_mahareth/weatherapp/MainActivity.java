@@ -11,19 +11,36 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+import cz.msebera.android.httpclient.Header;
+
 
 public class MainActivity extends AppCompatActivity {
     final int REQUEST_CODE=123;
     String LOCATION_PROVIDER = LocationManager.GPS_PROVIDER;
     int MIN_TIME=5000;
     int MIN_DISTANCE=1000;
+    String Weather_URL="http://api.openweathermap.org/data/2.5/weather";
+    String appID="af0e0fc5feac2aed5265470d0a0aa189";
     LocationManager locationManager;
     LocationListener locationListener;
+    TextView displayLocation;
+    TextView displayTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        displayLocation = (TextView)findViewById(R.id.txtCity);
+        displayTemp = (TextView)findViewById(R.id.txtTemp);
     }
 
     protected void onResume() {
@@ -58,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("Clima", "onLocationChanged: Latitude is "+latitude);
                 Log.d("Clima", "onLocationChanged: longitude is "+longitude);
+
+                RequestParams params= new RequestParams();
+                params.put("lat",latitude);
+                params.put("lon",longitude);
+               params.put("appid",appID);
+                letsDoSomeNetworking(params);
             }
 
             @Override
@@ -89,5 +112,22 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         locationManager.requestLocationUpdates(LOCATION_PROVIDER, MIN_TIME, MIN_DISTANCE, locationListener);
+    }
+    public void letsDoSomeNetworking(RequestParams params){
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Weather_URL,params,new JsonHttpResponseHandler(){
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                Log.d("Clima", "onSuccess: "+ response.toString());
+                WeatherDataClass weatherObject= new WeatherDataClass(response);
+                displayLocation.setText(weatherObject.getCity()+", "+weatherObject.getCountry());
+                displayTemp.setText(weatherObject.getTemp()+"°C");
+            }
+            public void onFailure(int statusCode, Header[] headers,Throwable e, JSONObject response){
+                Log.d("Clima", "onFailure: ");
+                Log.d("Clima", "Status code: "+statusCode);
+                Log.e("Clima",e.toString() );
+                Toast.makeText(MainActivity.this,"Request Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
