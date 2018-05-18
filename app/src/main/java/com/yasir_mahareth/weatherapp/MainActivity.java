@@ -2,6 +2,7 @@ package com.yasir_mahareth.weatherapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,14 +50,30 @@ public class MainActivity extends AppCompatActivity {
         displayIcon= (ImageView)findViewById(R.id.weatherIcon);
         toChangeCity=(ImageButton)findViewById(R.id.changeCity);
 
-        
+        toChangeCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ChangeCity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     protected void onResume() {
         super.onResume();
         Log.d("Clima", "onResume called ");
         Log.d("Clima", "Getting weather for current location");
-        getWeatherForCurrentLocation();
+
+        Intent intent =getIntent();
+        String newCity = intent.getStringExtra("city");
+        if(newCity != null){
+            getWeatherForCity(newCity);
+        }
+        else{
+            getWeatherForCurrentLocation();
+        }
+
+
     }
 
     @Override
@@ -146,5 +164,20 @@ public class MainActivity extends AppCompatActivity {
         displayTemp.setText(weatherObject.getTemp()+"°C");
         int resourdeID= getResources().getIdentifier(weatherObject.getIconName(),"drawable",getPackageName());
         displayIcon.setImageResource(resourdeID);
+    }
+    public void getWeatherForCity(String city){
+        RequestParams params = new RequestParams();
+        params.put("q",city);
+        params.put("appid",appID);
+
+        letsDoSomeNetworking(params);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(locationManager!=null){
+            locationManager.removeUpdates(locationListener);
+        }
     }
 }

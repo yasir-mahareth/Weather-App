@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#16a085"
+    android:padding="5dp"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/txtTemp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="29dp"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="8dp"
@@ -17,6 +18,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center_vertical|center_horizontal"
         android:text="@string/temp"
         android:textColor="#ecf0f1"
         android:textSize="24sp"
@@ -29,10 +31,11 @@
 
     <TextView
         android:id="@+id/txtCity"
-        android:layout_width="227dp"
+        android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="48dp"
+        android:gravity="center_vertical|center_horizontal"
         android:text="@string/location"
         android:textColor="#ecf0f1"
         android:textSize="24sp"
@@ -63,11 +66,10 @@
 
     <ImageView
         android:id="@+id/weatherIcon"
-        android:layout_width="191dp"
+        android:layout_width="0dp"
         android:layout_height="172dp"
+        android:layout_margin="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTemp"
         app:layout_constraintEnd_toStartOf="@+id/verticalRight"

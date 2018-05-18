@@ -13,34 +13,28 @@
         android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="10dp"
+        android:gravity="center_vertical|center_horizontal"
         android:text="@string/ChangeCity"
         android:textColor="#ecf0f1"
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/text_input_city"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/text_input_city"
-        android:layout_width="302dp"
+        android:layout_width="257dp"
         android:layout_height="45dp"
+        android:gravity="center_horizontal"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@id/guidelineLeft"
-        app:layout_constraintRight_toRightOf="@id/guidelineRight"
+        app:layout_constraintRight_toRightOf="@+id/guidelineRight"
         app:layout_constraintTop_toBottomOf="@id/txtChangeCity" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guidelineLeft"
@@ -50,20 +44,18 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/changeToMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineBackButton"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineTop"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineRight"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineTop"
-        app:srcCompat="@drawable/change_city_symbol_small"
-        tools:layout_editor_absoluteX="311dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:srcCompat="@drawable/change_city_symbol_small" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guidelineBackButton"
+        android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
