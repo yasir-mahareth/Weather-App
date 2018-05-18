@@ -11,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     LocationListener locationListener;
     TextView displayLocation;
     TextView displayTemp;
+    ImageView displayIcon;
+    ImageButton toChangeCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         displayLocation = (TextView)findViewById(R.id.txtCity);
         displayTemp = (TextView)findViewById(R.id.txtTemp);
+        displayIcon= (ImageView)findViewById(R.id.weatherIcon);
+        toChangeCity=(ImageButton)findViewById(R.id.changeCity);
+
+        
     }
 
     protected void onResume() {
@@ -114,13 +122,15 @@ public class MainActivity extends AppCompatActivity {
         locationManager.requestLocationUpdates(LOCATION_PROVIDER, MIN_TIME, MIN_DISTANCE, locationListener);
     }
     public void letsDoSomeNetworking(RequestParams params){
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Weather_URL,params,new JsonHttpResponseHandler(){
+
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 Log.d("Clima", "onSuccess: "+ response.toString());
-                WeatherDataClass weatherObject= new WeatherDataClass(response);
-                displayLocation.setText(weatherObject.getCity()+", "+weatherObject.getCountry());
-                displayTemp.setText(weatherObject.getTemp()+"°C");
+
+                displayFetchedDetails(response);
+
             }
             public void onFailure(int statusCode, Header[] headers,Throwable e, JSONObject response){
                 Log.d("Clima", "onFailure: ");
@@ -129,5 +139,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Request Failed",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void displayFetchedDetails(JSONObject response){
+        WeatherDataClass weatherObject= new WeatherDataClass(response);
+        displayLocation.setText(weatherObject.getCity()+", "+weatherObject.getCountry());
+        displayTemp.setText(weatherObject.getTemp()+"°C");
+        int resourdeID= getResources().getIdentifier(weatherObject.getIconName(),"drawable",getPackageName());
+        displayIcon.setImageResource(resourdeID);
     }
 }

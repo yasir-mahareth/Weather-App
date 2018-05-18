@@ -4,33 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#16a085"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/txtTemp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/temp"
+        android:textColor="#ecf0f1"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCity" />
+        app:layout_constraintEnd_toStartOf="@+id/verticalRight"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/verticalLeft"
+        app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtCity"
+        android:layout_width="227dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/location"
+        android:textColor="#ecf0f1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/weatherIcon"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintLeft_toLeftOf="@+id/verticalLeft"
+        app:layout_constraintRight_toRightOf="@+id/verticalRight"
+        app:layout_constraintTop_toTopOf="@+id/horizontalTop"
+        app:layout_constraintVertical_bias="0.103" />
+
+    <ImageButton
+        android:id="@+id/changeCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="64dp"
-        android:text="@string/location"
-        android:textSize="24sp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/verticalRight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/change_city_symbol_small" />
+
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="191dp"
+        android:layout_height="172dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTemp"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/verticalRight"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="@+id/verticalLeft"
+        app:layout_constraintTop_toBottomOf="@+id/txtCity"
+        app:srcCompat="@drawable/dunno" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontalTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15068494" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/verticalLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/verticalRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
 
 </android.support.constraint.ConstraintLayout>
