@@ -31,6 +31,8 @@
         android:layout_height="45dp"
         android:gravity="center_horizontal"
         android:inputType="text"
+        android:textColor="#ecf0f1"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/guidelineLeft"
         app:layout_constraintRight_toRightOf="@+id/guidelineRight"

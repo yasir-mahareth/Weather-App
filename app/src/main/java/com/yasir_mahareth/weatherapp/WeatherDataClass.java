@@ -12,6 +12,7 @@ public class WeatherDataClass {
     private String iconName;
     private int condition;
     private String country;
+    private String description;
 
 
     public WeatherDataClass(JSONObject jsonObject){
@@ -22,6 +23,7 @@ public class WeatherDataClass {
             this.country=jsonObject.getJSONObject("sys").getString("country");
             this.condition=jsonObject.getJSONArray("weather").getJSONObject(0).getInt("id");
             this.iconName=updateWeatherIcon(condition);
+            this.description=jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
 
         }
         catch (JSONException e){
@@ -50,6 +52,10 @@ public class WeatherDataClass {
 
     public int getCondition() {
         return condition;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     private static String updateWeatherIcon(int condition) {

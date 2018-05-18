@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     LocationListener locationListener;
     TextView displayLocation;
     TextView displayTemp;
+    TextView displaydescription;
     ImageView displayIcon;
     ImageButton toChangeCity;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         displayLocation = (TextView)findViewById(R.id.txtCity);
         displayTemp = (TextView)findViewById(R.id.txtTemp);
+        displaydescription = (TextView)findViewById(R.id.txtDescription);
         displayIcon= (ImageView)findViewById(R.id.weatherIcon);
         toChangeCity=(ImageButton)findViewById(R.id.changeCity);
 
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         WeatherDataClass weatherObject= new WeatherDataClass(response);
         displayLocation.setText(weatherObject.getCity()+", "+weatherObject.getCountry());
         displayTemp.setText(weatherObject.getTemp()+"°C");
+        displaydescription.setText(weatherObject.getDescription());
         int resourdeID= getResources().getIdentifier(weatherObject.getIconName(),"drawable",getPackageName());
         displayIcon.setImageResource(resourdeID);
     }
